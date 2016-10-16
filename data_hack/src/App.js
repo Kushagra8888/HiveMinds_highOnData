@@ -13,9 +13,14 @@ class App extends Component {
       return data.map(function(x) {return {x: x.date, y: x.likes / maxLikes}})
     }
 
-    this.prepareCountData = (data) => {
+    this.prepareStatusCountData = (data) => {
       var maxCount = Math.max(...data.map((x) => x.status_count))
       return data.map(function(x) {return {x: x.date, y: x.status_count / maxCount}})
+    }
+
+    this.prepareRetweetCountData = (data) => {
+      var maxCount = Math.max(...data.map((x) => x.re_tweets))
+      return data.map(function(x) {return {x: x.date, y: x.re_tweets / maxCount}})
     }
 
     this.getFrequencyMap = (text) => {
@@ -51,11 +56,12 @@ class App extends Component {
   render() {
     var chartData = this.props.data;
     var likesData = this.prepareLikesData(chartData);
-    var countData = this.prepareCountData(chartData);
+    var countData = this.prepareStatusCountData(chartData);
     var wordCloudData = this.prepareWordCloudData(chartData);
+    var retweetCountData = this.prepareRetweetCountData(chartData)
     return (
       <div className="App">
-        <TestChart data={{likes: likesData, count: countData, wordCloud: wordCloudData}} />
+        <TestChart data={{likes: likesData, count: countData, retweetCount: retweetCountData, wordCloud: wordCloudData}} />
       </div>
     );
   }

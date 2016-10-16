@@ -25,7 +25,8 @@ class TestChart extends Component {
                 <DiscreteColorLegend
                 items={[
                     {title: 'likes', color: '#003366'},
-                    {title: 'Tweet Count', color: 'orange'}
+                    {title: 'Tweet Count', color: 'orange'},
+                    {title: 'Retweet Count', color: 'green'}
                 ]} 
                 />
                 <VerticalGridLines />
@@ -41,6 +42,10 @@ class TestChart extends Component {
                 <LineSeries
                 data={this.props.data.count}
                 color='orange'
+                />
+                <LineSeries
+                data={this.props.data.retweetCount}
+                color='green'
                 />
             </XYPlot>
             <div className="wordcloud">
