@@ -10,17 +10,17 @@ class App extends Component {
     super();
     this.prepareLikesData = (data) => {
       var maxLikes = Math.max(...data.map((x) => x.likes))
-      return data.map(function(x) {return {x: x.date, y: x.likes / maxLikes}})
+      return data.map(function(x) {return {x: new Date(x.date), y: x.likes / maxLikes}})
     }
 
     this.prepareStatusCountData = (data) => {
       var maxCount = Math.max(...data.map((x) => x.status_count))
-      return data.map(function(x) {return {x: x.date, y: x.status_count / maxCount}})
+      return data.map(function(x) {return {x: new Date(x.date), y: x.status_count / maxCount}})
     }
 
     this.prepareRetweetCountData = (data) => {
       var maxCount = Math.max(...data.map((x) => x.re_tweets))
-      return data.map(function(x) {return {x: x.date, y: x.re_tweets / maxCount}})
+      return data.map(function(x) {return {x: new Date(x.date), y: x.re_tweets / maxCount}})
     }
 
     this.getFrequencyMap = (text) => {

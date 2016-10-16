@@ -4,6 +4,7 @@ import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines,
     VerticalBarSeries, LineSeries, DiscreteColorLegend, 
     Crosshair, Hint} from 'react-vis';
 import WordCloud from 'react-d3-cloud';
+import moment from 'moment';
 
 
 class TestChart extends Component {
@@ -14,11 +15,13 @@ class TestChart extends Component {
         word1: 100,
         word2: 200,
     }
+    var formatTimeMoment = (date) => {
+        return moment(date).format('MMM YY')
+    }
     console.log("Data: ", this.props.data);
     return (
         <div>
             <XYPlot
-                xType='ordinal'
                 margin={{bottom: 100}}
                 width={1200}
                 height={400}>
@@ -34,23 +37,24 @@ class TestChart extends Component {
                 <XAxis 
                 tickLabelAngle={90}
                 tickPadding={60}
+                tickFormat={formatTimeMoment}
                 />
-                <VerticalBarSeries
+                <LineSeries
+                xType='time'
                 data={this.props.data.likes}
                 color='#003366'
                 />
                 <LineSeries
+                xType='time'
                 data={this.props.data.count}
                 color='orange'
                 />
                 <LineSeries
+                xType='time'
                 data={this.props.data.retweetCount}
                 color='green'
                 />
             </XYPlot>
-            <div className="wordcloud">
-                <WordCloud data={this.props.data.wordCloud} />
-            </div>
         </div>
       
     )
